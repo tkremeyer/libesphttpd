@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.2.2)
 
+set(COMPONENT_SRCDIRS "core" "espfs" "util")
+set(COMPONENT_ADD_INCLUDEDIRS "core" "espfs" "util" "include")
+set(COMPONENT_REQUIRES lwip)
+register_component()
+
 include(CheckCCompilerFlag)
 
 function(enable_c_compiler_flag_if_supported flag)
@@ -54,6 +59,7 @@ add_executable(mkespfsimage
     espfs/mkespfsimage/heatshrink_encoder.c
 )
 
+set(ZLIB_ROOT )
 find_package(ZLIB REQUIRED)
 target_link_libraries(mkespfsimage ${ZLIB_LIBRARIES})
 
